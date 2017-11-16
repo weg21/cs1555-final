@@ -21,34 +21,18 @@ CREATE TABLE friends (
 	userID2 varchar2(20),
 	JDate   date          NOT NULL,
 	message varchar2(200) DEFAULT NULL,
-<<<<<<< HEAD
 	CONSTRAINT pk_friends PRIMARY KEY(userID1, userID2) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_friends_userID1 FOREIGN KEY(userID1) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_friends_userID2 FOREIGN KEY(userID2) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE
-=======
-	CONSTRAINT pk_friends PRIMARY KEY(userID1, userID2),
-	CONSTRAINT fk_friends_userID1 FOREIGN KEY(userID1) REFERENCES 
-profile(userID),
-	CONSTRAINT fk_friends_userID2 FOREIGN KEY(userID2) REFERENCES 
-profile(userID)
->>>>>>> ca21ab847c79e3303a4b650017f2dac15d22018e
 );
 
 CREATE TABLE pendingFriends (
 	fromID  varchar2(20),
 	toID    varchar2(20),
 	message varchar2(200) DEFAULT NULL,
-<<<<<<< HEAD
 	CONSTRAINT pk_pending_friends PRIMARY KEY(fromID, toID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_pendingFriends_fromID FOREIGN KEY(fromID) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_pendingFriends_toID FOREIGN KEY(toID) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE
-=======
-	CONSTRAINT pk_pending_friends PRIMARY KEY(fromID, toID),
-	CONSTRAINT fk_pendingFriends_fromID FOREIGN KEY(fromID) REFERENCES 
-profile(userID),
-	CONSTRAINT fk_pendingFriends_toID FOREIGN KEY(toID) REFERENCES 
-profile(userID)
->>>>>>> ca21ab847c79e3303a4b650017f2dac15d22018e
 );
 
 CREATE TABLE groups (
@@ -64,7 +48,6 @@ CREATE TABLE messages (
 	message   varchar2(200) DEFAULT NULL,
 	toUserID  varchar2(20)  DEFAULT NULL,
 	toGroupID varchar2(20)  DEFAULT NULL,
-<<<<<<< HEAD
 	dateSent  date          NOT NULL,
 	CONSTRAINT pk_messages PRIMARY KEY(msgID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_messages_fromID FOREIGN KEY(fromID) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE,
@@ -72,66 +55,32 @@ CREATE TABLE messages (
 	CONSTRAINT fk_messages_toGroupID FOREIGN KEY(toGroupID) REFERENCES groups(gID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT ic_messages1 CHECK(toUserID IS NOT NULL OR toGroupID IS NOT NULL) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT ic_messages2 CHECK((toUserID IS NOT NULL AND toGroupID IS NULL) OR (toUserID IS NULL AND toGroupID IS NOT NULL))  DEFERABLE INITIALLY IMEDIATE
-=======
-	dateSent  date          NOT NULL, --????????????
-	CONSTRAINT pk_messages PRIMARY KEY(msgID),
-	CONSTRAINT fk_messages_fromID FOREIGN KEY(fromID) REFERENCES 
-profile(userID),
-	CONSTRAINT fk_messages_toUserID FOREIGN KEY(toUserID) REFERENCES 
-profile(userID),
-	CONSTRAINT fk_messages_toGroupID FOREIGN KEY(toGroupID) REFERENCES 
-groups(gID) 
->>>>>>> ca21ab847c79e3303a4b650017f2dac15d22018e
 );
 
 CREATE TABLE messageRecipient (
 	msgID  varchar2(20),
-<<<<<<< HEAD
 	userID varchar2(20),
 	CONSTRAINT pk_messageRecipient PRIMARY KEY(msgID, userID) DEFERABLE INITIALLY IMEDIATE,
 	--NOTE: I used both msgID and userID for the pk in case one message could be sent to multiple people via a group
 	CONSTRAINT fk_messageRecipient_userID FOREIGN KEY(userID) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE
-=======
-	userID varchar2(20) NOT NULL, --????????????
-	CONSTRAINT pk_messageRecipient PRIMARY KEY(msgID),
-	CONSTRAINT fk_messageRecipient_userID FOREIGN KEY(userID) 
-REFERENCES profile(userID)
->>>>>>> ca21ab847c79e3303a4b650017f2dac15d22018e
 );
 
 CREATE TABLE groupMembership (
 	gID   varchar2(20),
 	userID varchar2(20),
-<<<<<<< HEAD
 	role   varchar2(20) DEFAULT 'member', --assuming this is the default vaule for role
 	CONSTRAINT pk_groupMembership PRIMARY KEY(gID, userID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_groupMembership_gID FOREIGN KEY(gID) REFERENCES groups(gID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_groupMembership_userID FOREIGN KEY(userID) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE
-=======
-	role   varchar2(20) DEFAULT 'member', --????????????
-	CONSTRAINT pk_groupMembership PRIMARY KEY(gID, userID),
-	CONSTRAINT fk_groupMembership_gID FOREIGN KEY(gID) REFERENCES 
-groups(gID),
-	CONSTRAINT fk_groupMembership_userID FOREIGN KEY(userID) 
-REFERENCES profile(userID)
->>>>>>> ca21ab847c79e3303a4b650017f2dac15d22018e
 );
 
 CREATE TABLE pendingGroupMembers (
 	gID      varchar2(20),
 	userID  varchar2(20),
 	message varchar2(200) DEFAULT NULL,
-<<<<<<< HEAD
 	CONSTRAINT pk_pendingGroupMembers PRIMARY KEY(gID, userID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_pendingGroupMembers_gID FOREIGN KEY(gID) REFERENCES groups(gID) DEFERABLE INITIALLY IMEDIATE,
 	CONSTRAINT fk_pendingGroupMembers_userID FOREIGN KEY(userID) REFERENCES profile(userID) DEFERABLE INITIALLY IMEDIATE
-);
-=======
-	CONSTRAINT pk_pendingGroupMembers PRIMARY KEY(gID, userID),
-	CONSTRAINT fk_pendingGroupMembers_gID FOREIGN KEY(gID) REFERENCES 
-groups(gID),
-	CONSTRAINT fk_pendingGroupMembers_userID FOREIGN KEY(userID) 
-REFERENCES profile(userID)
 );
 
 INSERT INTO profile (userID,name,password,date_of_birth,lastLogin) VALUES (11111111,'Lev 
