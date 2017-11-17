@@ -1172,3 +1172,4 @@ INSERT INTO messageRecipient (msgID,userID) VALUES ('M207113',11111161);
 INSERT INTO messageRecipient (msgID,userID) VALUES ('M680785',11111151);
 INSERT INTO messageRecipient (msgID,userID) VALUES ('M733415',11111132);
 INSERT INTO messageRecipient (msgID,userID) VALUES ('M521921',11111138);
+COMMIT;
